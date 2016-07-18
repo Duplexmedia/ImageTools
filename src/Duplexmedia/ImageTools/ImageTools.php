@@ -24,6 +24,35 @@ class ImageTools {
     }
 
     /**
+     * Calculates the brightness of the given color. This is a passthrough
+     * to ColorTools\calculateBrightness for backwards compatibility.
+     *
+     * @deprecated Use the ColorTools class directly.
+     * @link http://www.nbdtech.com/Blog/archive/2008/04/27/Calculating-the-Perceived-Brightness-of-a-Color.aspx
+     *
+     * @param $color string the hex color string.
+     * @return float the brightness.
+     */
+    public function calculateBrightness($color)
+    {
+        return $this->colorTools->calculateBrightness($color);
+    }
+
+    /**
+     * Calculates the saturation of the given color. This is a passthrough
+     * to ColorTools\calculateBrightness for backwards compatibility.
+     *
+     * @deprecated Use the ColorTools class directly.
+     *
+     * @param $color string the color as array or hex color string.
+     * @return float the saturation.
+     */
+    public function calculateSaturation($color)
+    {
+        return $this->colorTools->calculateSaturation($color);
+    }
+
+    /**
      * Returns the size of the image.
      *
      * @return array the x and y sizes of the image.
@@ -94,6 +123,19 @@ class ImageTools {
         return $this->image->getimagealphachannel() == 1;
     }
 
+    /**
+     * Converts a HEX-color string into it's RGB components. This is a passthrough to
+     * ColorTools\hex2rgb for backwards compatibility.
+     *
+     * @deprecated Use the ColorTools class directly.
+     *
+     * @param $hex string the hex color string.
+     * @return array the resulting colors.
+     */
+    public function hex2rgb($hex)
+    {
+        return $this->colorTools->hex2rgb($hex);
+    }
 
     /**
      * Returns the format of the image.
