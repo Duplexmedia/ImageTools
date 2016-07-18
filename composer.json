@@ -1,0 +1,23 @@
+{
+    "name": "duplexmedia/image-tools",
+    "description": "Image and color processing helpers.",
+    "type": "library",
+    "keywords": ["image", "tools", "helper", "prominent", "color"],
+    "homepage": "https://github.com/Duplexmedia/ImageTools",
+    "require": {
+        "league/color-extractor": "^0.3.1",
+        "ext-imagick": "*",
+        "php": ">=5.4.0"
+    },
+    "authors": [
+        {
+            "name": "Duplexmedia",
+            "email": "mail@duplexmedia.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "": "src"
+        }
+    }
+}

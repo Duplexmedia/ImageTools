@@ -4,3 +4,9 @@
 */cache/*
 !*/cache/index.html
 !*/cache/.htaccess
+
+# We're a library. Do not hardfix the deps.
+composer.lock
+/vendor/
+
+/.idea/
