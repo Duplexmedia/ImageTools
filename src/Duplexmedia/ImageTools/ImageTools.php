@@ -174,6 +174,19 @@ class ImageTools {
     }
 
     /**
+     * Resizes the image.
+     *
+     * @param $width int the new width.
+     * @param $height int the new height
+     * @param $filter int the resize filter to use
+     * @return bool true, if the resize operation succeeded.
+     */
+    public function resizeImage($width, $height, $filter)
+    {
+        return $this->image->resizeImage($width, $height, $filter, 1);
+    }
+
+    /**
      * Saves the processed image to the given file path.
      *
      * @param $path string the file path.
