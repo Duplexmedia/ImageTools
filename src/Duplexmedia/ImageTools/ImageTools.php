@@ -18,9 +18,9 @@ class ImageTools {
     {
         $this->colorTools = new ColorTools();
         $this->imagePath = $imagePath;
-        $this->image = new Imagick();
-        $this->image->setBackgroundColor(new ImagickPixel('transparent'));
-        $this->image->readimage($imagePath);
+        $this->image = new \Imagick();
+        $this->image->setBackgroundColor(new \ImagickPixel('transparent'));
+        $this->image->readImage($imagePath);
     }
 
     /**
@@ -59,7 +59,7 @@ class ImageTools {
      */
     public function getImageSize()
     {
-        return array($this->image->getimagewidth(), $this->image->getimageheight());
+        return array($this->image->getImageWidth(), $this->image->getImageHeight());
     }
 
     /**
@@ -70,9 +70,9 @@ class ImageTools {
      */
     public function trimImage($fuzz = 0.1)
     {
-        $this->image->trimimage($fuzz);
+        $this->image->trimImage($fuzz);
         $this->image->setImagePage(0, 0, 0, 0);
-        return array($this->image->getimagewidth(), $this->image->getimageheight());
+        return array($this->image->getImageWidth(), $this->image->getImageHeight());
     }
 
     /**
@@ -88,9 +88,9 @@ class ImageTools {
     public function getAccentColors($number = 5, $sampleSize = 500, $maxBrightness = -1)
     {
         $fileName = md5(microtime()) . ".png";
-        $this->image->setimageformat("png");
-        $this->image->resizeImage($sampleSize, $sampleSize, Imagick::FILTER_LANCZOS, 1, true);
-        $this->image->writeimage($fileName);
+        $this->image->setImageFormat("png");
+        $this->image->resizeImage($sampleSize, $sampleSize, \Imagick::FILTER_LANCZOS, 1, true);
+        $this->image->writeImage($fileName);
         $image = new ColorExtractor(imagecreatefrompng($fileName));
 
         $results = array_filter($image->extract($number), function ($color) use ($maxBrightness) {
@@ -108,9 +108,9 @@ class ImageTools {
      */
     public function getAverageColor()
     {
-        $this->image->resizeimage(1, 1, Imagick::FILTER_CATROM, 1);
-        $color = $this->image->getimagepixelcolor(0, 0);
-        return $color->getcolor();
+        $this->image->resizeImage(1, 1, \Imagick::FILTER_CATROM, 1);
+        $color = $this->image->getImagePixelColor(0, 0);
+        return $color->getColor();
     }
 
     /**
@@ -120,7 +120,7 @@ class ImageTools {
      */
     public function hasTransparency()
     {
-        return $this->image->getimagealphachannel() == 1;
+        return $this->image->getImageAlphaChannel() == 1;
     }
 
     /**
@@ -144,7 +144,7 @@ class ImageTools {
      */
     public function getFormat()
     {
-        return $this->image->getimageformat();
+        return $this->image->getImageFormat();
     }
 
     /**
@@ -155,7 +155,7 @@ class ImageTools {
      */
     public function colorizeImage($black = true)
     {
-        return $this->image->modulateimage($black ? 0 : 255, 100, 0);
+        return $this->image->modulateImage($black ? 0 : 255, 100, 0);
     }
 
     /**
@@ -169,8 +169,8 @@ class ImageTools {
     public function blurImage($spread = 8, $radius = 0, $gaussian = false)
     {
         return $gaussian ?
-            $this->image->gaussianblurimage($radius, $spread) :
-            $this->image->blurimage($radius, $spread);
+            $this->image->gaussianBlurImage($radius, $spread) :
+            $this->image->blurImage($radius, $spread);
     }
 
     /**
@@ -196,8 +196,8 @@ class ImageTools {
     public function saveImage($path, $format = "png")
     {
         try {
-            $this->image->setimageformat($format);
-            $this->image->writeimage($path);
+            $this->image->setImageFormat($format);
+            $this->image->writeImage($path);
             return true;
         } catch (\Exception $ex) {
             return false;
