@@ -180,11 +180,12 @@ class ImageTools {
      * @param $width int the new width.
      * @param $height int the new height
      * @param $filter int the resize filter to use
+     * @param $proportionalResize bool resize proportionally?
      * @return bool true, if the resize operation succeeded.
      */
-    public function resizeImage($width, $height, $filter)
+    public function resizeImage($width, $height, $filter, $proportionalResize = false)
     {
-        return $this->image->resizeImage($width, $height, $filter, 1);
+        return $this->image->resizeImage($width, $height, $filter, 1, $proportionalResize);
     }
 
     /**
