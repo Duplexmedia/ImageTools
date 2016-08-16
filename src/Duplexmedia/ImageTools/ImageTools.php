@@ -2,6 +2,7 @@
 
 namespace Duplexmedia\ImageTools;
 use League\ColorExtractor\ColorExtractor;
+use League\ColorExtractor\Palette;
 
 /**
  * A class with a couple of useful image processing functions.
@@ -91,7 +92,7 @@ class ImageTools {
         $this->image->setImageFormat("png");
         $this->image->resizeImage($sampleSize, $sampleSize, \Imagick::FILTER_LANCZOS, 1, true);
         $this->image->writeImage($fileName);
-        $image = new ColorExtractor(imagecreatefrompng($fileName));
+        $image = new ColorExtractor(Palette::fromFilename($fileName));
 
         $results = array_filter($image->extract($number), function ($color) use ($maxBrightness) {
             return $maxBrightness < 0 || $this->colorTools->calculateBrightness($color) < $maxBrightness;
