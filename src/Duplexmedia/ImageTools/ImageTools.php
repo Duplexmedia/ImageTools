@@ -1,6 +1,7 @@
 <?php
 
 namespace Duplexmedia\ImageTools;
+use League\ColorExtractor\Color;
 use League\ColorExtractor\ColorExtractor;
 use League\ColorExtractor\Palette;
 
@@ -94,7 +95,9 @@ class ImageTools {
         $this->image->writeImage($fileName);
         $image = new ColorExtractor(Palette::fromFilename($fileName));
 
-        $results = array_filter($image->extract($number), function ($color) use ($maxBrightness) {
+        $results = array_filter(array_map(function ($colorInt) {
+            return Color::fromIntToHex($colorInt);
+        }, $image->extract($number)), function ($color) use ($maxBrightness) {
             return $maxBrightness < 0 || $this->colorTools->calculateBrightness($color) < $maxBrightness;
         });
 
